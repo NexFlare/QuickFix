@@ -1,9 +1,5 @@
 import mongoose from "mongoose";
-import { IUser } from "../../types/user";
-
-interface IUserSchema extends IUser {
-  password: string;
-}
+import { IUser, IUserSchema } from "../../types/user";
 
 const UserSchema = new mongoose.Schema<IUserSchema>({
   email: {
@@ -14,6 +10,7 @@ const UserSchema = new mongoose.Schema<IUserSchema>({
   username: {
     type: String,
     required: [true, "Please add a userName."],
+    unique: true,
   },
   password: {
     type: String,
@@ -21,10 +18,9 @@ const UserSchema = new mongoose.Schema<IUserSchema>({
   },
   userType: {
     type: String,
-    ref: "userRoles",
     required: [true, "Please Select a Type"],
   },
-  currentCourses: [{ type: mongoose.Types.ObjectId, ref: "Courses" }],
+  // currentCourses: [{ type: mongoose.Types.ObjectId, ref: "Courses" }],
   firstName: {
     type: String,
     required: true,
