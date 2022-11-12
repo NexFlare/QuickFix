@@ -25,12 +25,14 @@ export const authenticateUser = async (
 ): Promise<IUserSchema> => {
   try {
     const userObj = await User.findOne({ username: user.username });
-    if (comparePassword(user.password, userObj.password)) {
+    const isValid = await comparePassword(user.password, userObj.password);
+    if (isValid) {
       return userObj;
     } else {
       throw new QuickFixError({ clientMsg: "Please enter valid details" });
     }
   } catch (err) {
+    console.log("Error is", err);
     throw err;
   }
 };

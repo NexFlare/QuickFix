@@ -13,7 +13,7 @@ export const catchError = (fnc) => {
         status: "FAILURE",
         code: 400,
         error: {
-          message: clientMsg,
+          message,
         },
         response: {},
       });
