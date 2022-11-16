@@ -16,6 +16,11 @@ export const createNewUser = async (
     const savedUser = await userObj.save();
     return savedUser;
   } catch (err) {
+    if (err.keyValue) {
+      throw new QuickFixError({
+        clientMsg: `${Object.keys(err.keyValue)[0]} already exists`,
+      });
+    }
     throw err;
   }
 };
@@ -25,6 +30,9 @@ export const authenticateUser = async (
 ): Promise<IUserSchema> => {
   try {
     const userObj = await User.findOne({ username: user.username });
+    if (!userObj) {
+      throw new QuickFixError({ clientMsg: "Please enter valid details" });
+    }
     const isValid = await comparePassword(user.password, userObj.password);
     if (isValid) {
       return userObj;
