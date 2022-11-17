@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema<IUserSchema>({
     type: String,
     required: [true, "Please Select a Type"],
   },
-  // currentCourses: [{ type: mongoose.Types.ObjectId, ref: "Courses" }],
+  currentCourses: [{ type: mongoose.Types.ObjectId, ref: "Course" }],
   firstName: {
     type: String,
     required: true,
@@ -30,10 +30,6 @@ const UserSchema = new mongoose.Schema<IUserSchema>({
     required: true,
   },
 });
-
-// UserSchema.methods.comparePassword = function (password) {
-//   return bcrypt.compareSync(password, this.password);
-// };
 
 const model = mongoose.model("User", UserSchema);
 

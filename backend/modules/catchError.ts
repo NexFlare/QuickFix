@@ -3,6 +3,7 @@ export const catchError = (fnc) => {
     try {
       await fnc(req, res, next);
     } catch (err) {
+      console.log("Idhar bhi aaya ??", err);
       const {
         message = "error",
         code = 400,

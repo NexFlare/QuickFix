@@ -22,6 +22,12 @@ export interface IRequestUser {
   userType: TUserType;
   currentCourses?: Array<string>;
   password: string;
+  username: string;
+}
+
+export interface IRequestAddCourse {
+  userId: string;
+  courseId: string;
 }
 
 export interface IRequestUserSignIn {
